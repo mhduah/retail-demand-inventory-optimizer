@@ -13,7 +13,7 @@ The project combines:
 - stochastic optimisation
 - business-focused evaluation and visualisation
 
-The objective is not merely to produce accurate forecasts. It is to determine which forecasting and optimisation decisions produce the best balance between customer service, stockouts, excess inventory, and operating cost.
+The objective is not merely to predict demand accurately. It is to determine which forecasting and optimisation decisions produce the best balance between customer service, stockouts, excess inventory, and operating cost.
 
 ---
 
@@ -26,13 +26,13 @@ Retail inventory decisions involve a fundamental trade-off:
 
 This project builds a complete decision pipeline from raw retail data to constrained inventory allocation.
 
-### Headline results
+### Headline Results
 
 - Gradient boosting reduced forecast RMSE by **10.06%** compared with the adaptive baseline.
-- The machine-learning forecast achieved an almost unbiased result, with a bias of **0.0029**.
+- The machine-learning model achieved an almost unbiased forecast, with a bias of **0.0029**.
 - A newsvendor safety-stock policy reduced operating cost by **30.34%** compared with ordering only the machine-learning point forecast.
-- A stochastic expected-cost MILP reduced operating cost by **13.89%** under tight constraints.
-- The stochastic MILP reduced operating cost by **4.86%** under balanced constraints.
+- A stochastic expected-cost MILP reduced operating cost by **13.89%** under tight resource constraints.
+- The same stochastic MILP reduced operating cost by **4.86%** under balanced constraints.
 - Under near-full resources, a simpler proportional allocation remained marginally better.
 
 > **Business conclusion:** Stochastic optimisation adds the most value when purchasing budget and storage capacity are scarce. Simpler allocation rules can remain competitive when resource constraints are loose.
@@ -45,17 +45,17 @@ A retailer must decide how much inventory to order before future demand is known
 
 Ordering too little may result in:
 
-- stockouts;
-- lost sales;
-- dissatisfied customers;
-- reduced service levels.
+- stockouts
+- lost sales
+- dissatisfied customers
+- reduced service levels
 
 Ordering too much may result in:
 
-- excess inventory;
-- storage and holding costs;
-- markdown risk;
-- tied-up working capital.
+- excess inventory
+- storage and holding costs
+- markdown risk
+- tied-up working capital
 
 This project addresses three connected questions:
 
@@ -67,14 +67,14 @@ This project addresses three connected questions:
 
 ## Key Results
 
-### 1. Forecasting performance
+### 1. Forecasting Performance
 
 Four forecasting approaches were evaluated on an untouched 28-day holdout period:
 
-- last-value naïve forecast;
-- weekly seasonal naïve forecast;
-- adaptive baseline selected through rolling backtesting;
-- pooled histogram gradient-boosting model.
+- last-value naïve forecast
+- weekly seasonal naïve forecast
+- adaptive baseline selected through rolling backtesting
+- pooled histogram gradient-boosting model
 
 | Model | MAE | RMSE | Bias | WAPE |
 |---|---:|---:|---:|---:|
@@ -85,9 +85,9 @@ Four forecasting approaches were evaluated on an untouched 28-day holdout period
 
 Compared with the adaptive baseline, the gradient-boosting model:
 
-- reduced RMSE by **10.06%**;
-- almost eliminated systematic forecast bias;
-- produced a slightly higher MAE of **1.69%**.
+- reduced RMSE by **10.06%**
+- almost eliminated systematic forecast bias
+- produced a slightly higher MAE of **1.69%**
 
 This means that the adaptive baseline made slightly smaller typical errors, while the machine-learning model was more effective at reducing large errors and systematic underforecasting.
 
@@ -97,12 +97,12 @@ This means that the adaptive baseline made slightly smaller typical errors, whil
 
 ---
 
-### 2. Forecast-driven inventory planning
+### 2. Forecast-Driven Inventory Planning
 
 The forecasting models were converted into inventory decisions using two policies:
 
-1. point-forecast ordering;
-2. newsvendor-adjusted ordering with safety stock.
+1. point-forecast ordering
+2. newsvendor-adjusted ordering with safety stock
 
 | Forecast and policy | Fill rate | Stockout series | Operating cost |
 |---|---:|---:|---:|
@@ -111,25 +111,17 @@ The forecasting models were converted into inventory decisions using two policie
 | Adaptive + newsvendor | 86.38% | 47.33% | 6,762 |
 | Adaptive + point forecast | 65.94% | 70.67% | 11,686 |
 
-Using machine-learning forecasts with a newsvendor safety-stock policy reduced operating cost from:
+Using machine-learning forecasts with a newsvendor safety-stock policy reduced operating cost from 5,085 to 3,542.
 
-$$
-5{,}085 \longrightarrow 3{,}542
-$$
-
-The corresponding percentage reduction is:
-
-$$
-\frac{5{,}085-3{,}542}{5{,}085}\times 100
-=
-30.34\%.
-$$
+```math
+\frac{5{,}085-3{,}542}{5{,}085}\times 100 = 30.34\%
+```
 
 ![Inventory policy comparison](reports/figures/inventory_policy_cost_comparison.png)
 
 ---
 
-### 3. Inventory allocation under resource constraints
+### 3. Inventory Allocation Under Resource Constraints
 
 The unconstrained machine-learning newsvendor plan required 9,548 units. Three resource scenarios were therefore introduced.
 
@@ -141,11 +133,11 @@ The unconstrained machine-learning newsvendor plan required 9,548 units. Three r
 
 Three allocation approaches were compared:
 
-- proportional heuristic;
-- target-shortfall MILP;
-- stochastic expected-cost MILP.
+- proportional heuristic
+- target-shortfall MILP
+- stochastic expected-cost MILP
 
-#### Tight constraints
+#### Tight Constraints
 
 | Method | Fill rate | Shortage units | Operating cost |
 |---|---:|---:|---:|
@@ -155,13 +147,11 @@ Three allocation approaches were compared:
 
 The stochastic MILP reduced operating cost by:
 
-$$
-\frac{6{,}690-5{,}761}{6{,}690}\times 100
-=
-13.89\%.
-$$
+```math
+\frac{6{,}690-5{,}761}{6{,}690}\times 100 = 13.89\%
+```
 
-#### Balanced constraints
+#### Balanced Constraints
 
 | Method | Fill rate | Shortage units | Operating cost |
 |---|---:|---:|---:|
@@ -171,13 +161,11 @@ $$
 
 The stochastic MILP reduced operating cost by:
 
-$$
-\frac{4{,}112-3{,}912}{4{,}112}\times 100
-=
-4.86\%.
-$$
+```math
+\frac{4{,}112-3{,}912}{4{,}112}\times 100 = 4.86\%
+```
 
-#### Near-full constraints
+#### Near-Full Constraints
 
 | Method | Fill rate | Shortage units | Operating cost |
 |---|---:|---:|---:|
@@ -199,12 +187,12 @@ The project uses a reproducible subset of the public M5 Forecasting dataset.
 
 The analytical subset contains:
 
-- 50 food products;
-- 3 stores: `CA_1`, `TX_1`, and `WI_1`;
-- 1,941 historical days;
-- 150 product-store demand series;
-- 291,150 daily sales records;
-- 31,207 product-store-week price records.
+- 50 food products
+- 3 stores: `CA_1`, `TX_1`, and `WI_1`
+- 1,941 historical days
+- 150 product-store demand series
+- 291,150 daily sales records
+- 31,207 product-store-week price records
 
 The final 28 days are reserved as an untouched evaluation period:
 
@@ -262,34 +250,34 @@ Business reports and portfolio visualisations
 
 ## Data Engineering
 
-### Source validation
+### Source Validation
 
 The raw-data validation stage checks:
 
-- required files;
-- expected columns;
-- calendar coverage;
-- day-column structure;
-- price-table structure;
-- sales-table dimensions.
+- required files
+- expected columns
+- calendar coverage
+- day-column structure
+- price-table structure
+- sales-table dimensions
 
-### Analytical subset
+### Analytical Subset
 
 The project uses:
 
-- department `FOODS_3`;
-- stores `CA_1`, `TX_1`, and `WI_1`;
-- 50 products available across all three stores.
+- department `FOODS_3`
+- stores `CA_1`, `TX_1`, and `WI_1`
+- 50 products available across all three stores
 
 The subset is transformed into a relational model containing:
 
-- `dim_items`;
-- `dim_stores`;
-- `dim_calendar`;
-- `fact_sales`;
-- `fact_prices`.
+- `dim_items`
+- `dim_stores`
+- `dim_calendar`
+- `fact_sales`
+- `fact_prices`
 
-### SQLite analytical database
+### SQLite Analytical Database
 
 The relational data is loaded into:
 
@@ -299,10 +287,10 @@ data/processed/retail_inventory.db
 
 The database includes:
 
-- primary-key constraints;
-- foreign-key relationships;
-- analytical indexes;
-- data-integrity checks.
+- primary-key constraints
+- foreign-key relationships
+- analytical indexes
+- data-integrity checks
 
 ---
 
@@ -335,11 +323,9 @@ reports/tables/
 
 ## Forecasting Methodology
 
-### Holdout strategy
+### Holdout Strategy
 
 The final 28 days are reserved as an untouched holdout period.
-
-The model-development sequence is:
 
 ```text
 Historical training data
@@ -356,38 +342,32 @@ Untouched 28-day evaluation
 
 No random train-test split is used because random splitting would violate chronological ordering.
 
----
-
-### Baseline models
+### Baseline Models
 
 The project evaluates:
 
-- zero-demand forecast;
-- last-value naïve forecast;
-- weekly seasonal naïve forecast;
-- trailing seven-day mean;
-- trailing 28-day mean.
+- zero-demand forecast
+- last-value naïve forecast
+- weekly seasonal naïve forecast
+- trailing seven-day mean
+- trailing 28-day mean
 
 The weekly seasonal forecast repeats the most recent seven-day demand pattern across the 28-day forecast horizon.
 
----
-
-### Adaptive model selection
+### Adaptive Model Selection
 
 A separate baseline is selected for every product-store series.
 
 For each series:
 
-1. the final 28 days remain untouched;
-2. candidate models are evaluated across four earlier 28-day backtesting windows;
-3. the model with the lowest historical MAE is selected;
-4. the selected model is evaluated on the final holdout.
+1. The final 28 days remain untouched.
+2. Candidate models are evaluated across four earlier 28-day backtesting windows.
+3. The model with the lowest historical MAE is selected.
+4. The selected model is evaluated on the final holdout.
 
 Almost half of the series selected a zero-demand forecast, reflecting the strongly intermittent nature of the dataset.
 
----
-
-### Machine-learning model
+### Machine-Learning Model
 
 The pooled forecasting model is:
 
@@ -403,38 +383,36 @@ The model is trained simultaneously across all 150 product-store series.
 
 The feature set includes:
 
-- product identity;
-- store identity;
-- selling price;
-- price-availability indicator;
-- weekday cycle;
-- month cycle;
-- event indicator;
-- SNAP indicator;
-- lagged demand at 1, 7, 14, and 28 days;
-- seven-day rolling mean;
-- seven-day rolling standard deviation;
-- seven-day zero-demand rate;
-- 28-day rolling mean;
-- 28-day rolling standard deviation;
-- 28-day zero-demand rate;
-- short-term versus long-term demand trend.
+- product identity
+- store identity
+- selling price
+- price-availability indicator
+- weekday cycle
+- month cycle
+- event indicator
+- SNAP indicator
+- lagged demand at 1, 7, 14, and 28 days
+- seven-day rolling mean
+- seven-day rolling standard deviation
+- seven-day zero-demand rate
+- 28-day rolling mean
+- 28-day rolling standard deviation
+- 28-day zero-demand rate
+- short-term versus long-term demand trend
 
 A total of 282,750 training observations and 21 model features are used.
 
----
-
-### Recursive forecasting
+### Recursive Forecasting
 
 The machine-learning model forecasts the final 28 days recursively.
 
 The process is:
 
-1. predict the first holdout day;
-2. append the prediction to the available demand history;
-3. construct the next day’s lag and rolling features;
-4. predict the next day;
-5. repeat for all 28 days.
+1. Predict the first holdout day.
+2. Append the prediction to the available demand history.
+3. Construct the next day’s lag and rolling features.
+4. Predict the next day.
+5. Repeat for all 28 days.
 
 Actual future holdout demand is never used to construct future lag features.
 
@@ -444,64 +422,54 @@ This prevents look-ahead leakage and produces a realistic multi-step forecasting
 
 ## Inventory Methodology
 
-### Point-forecast ordering
+### Point-Forecast Ordering
 
-The point-forecast policy orders the rounded total predicted demand:
+The point-forecast policy orders the rounded total predicted demand.
 
-$$
-q_i
-=
-\left\lceil
-\widehat{D}_i
-\right\rceil,
-$$
+```math
+q_i = \left\lceil \widehat{D}_i \right\rceil
+```
 
 where:
 
-- $q_i$ is the order quantity for product-store series $i$;
-- $\widehat{D}_i$ is predicted demand over the 28-day horizon.
+- `q_i` is the order quantity for product-store series `i`
+- `D̂_i` is predicted demand over the 28-day horizon
 
----
-
-### Newsvendor-adjusted ordering
+### Newsvendor-Adjusted Ordering
 
 Safety stock is added using:
 
-$$
-q_i
-=
-\left\lceil
-\widehat{D}_i+z\sigma_i
-\right\rceil,
-$$
+```math
+q_i = \left\lceil \widehat{D}_i + z\sigma_i \right\rceil
+```
 
 where:
 
-- $\sigma_i$ is the estimated variability of historical 28-day demand;
-- $z$ is the service factor determined by the shortage-to-holding-cost ratio.
+- `σ_i` is the estimated variability of historical 28-day demand
+- `z` is the service factor determined by the shortage-to-holding-cost ratio
 
 The project assumes:
 
-$$
-c_{\text{shortage}}=5
-$$
+```math
+c_{\mathrm{shortage}} = 5
+```
 
 and:
 
-$$
-c_{\text{holding}}=1.
-$$
+```math
+c_{\mathrm{holding}} = 1
+```
 
 The corresponding critical ratio is:
 
-$$
-\frac{c_{\text{shortage}}}
-{c_{\text{shortage}}+c_{\text{holding}}}
+```math
+\frac{c_{\mathrm{shortage}}}
+{c_{\mathrm{shortage}}+c_{\mathrm{holding}}}
 =
 \frac{5}{5+1}
 =
-0.8333.
-$$
+0.8333
+```
 
 These values represent relative operating-cost units rather than euros or dollars.
 
@@ -513,40 +481,39 @@ The first constrained MILP minimises weighted shortfalls from the unconstrained 
 
 Let:
 
-- $t_i$ be the unconstrained target quantity;
-- $q_i$ be the allocated order quantity;
-- $s_i$ be the shortfall from the target;
-- $c_i$ be the estimated procurement cost;
-- $B$ be the available purchasing budget;
-- $C$ be the available storage capacity;
-- $w_i$ be a product-priority weight.
+- `t_i` be the unconstrained target quantity
+- `q_i` be the allocated order quantity
+- `s_i` be the shortfall from the target
+- `c_i` be the estimated procurement cost
+- `B` be the available purchasing budget
+- `C` be the available storage capacity
+- `w_i` be a product-priority weight
 
 The objective is:
 
-$$
-\min_{q,s}
-\sum_i w_i s_i.
-$$
+```math
+\min_{q,s}\sum_i w_i s_i
+```
 
 The model is subject to:
 
-$$
-q_i+s_i=t_i,
-$$
+```math
+q_i+s_i=t_i
+```
 
-$$
-\sum_i c_iq_i\leq B,
-$$
+```math
+\sum_i c_iq_i\leq B
+```
 
-$$
-\sum_i q_i\leq C,
-$$
+```math
+\sum_i q_i\leq C
+```
 
 and:
 
-$$
-q_i\in\mathbb{Z}_{\geq0}.
-$$
+```math
+q_i\in\mathbb{Z}_{\geq0}
+```
 
 This model was feasible and mathematically correct, but it performed poorly on realised demand because its objective did not directly match the operating-cost evaluation function.
 
@@ -560,63 +527,63 @@ The improved stochastic MILP minimises expected shortage and holding costs acros
 
 Let:
 
-- $q_i$ be the order quantity for item $i$;
-- $u_{ik}$ be the shortage for item $i$ under demand scenario $k$;
-- $o_{ik}$ be leftover inventory for item $i$ under scenario $k$;
-- $d_{ik}$ be simulated demand;
-- $\pi_k$ be the probability of scenario $k$;
-- $c_i$ be estimated procurement cost;
-- $B$ be the purchasing budget;
-- $C$ be storage capacity.
+- `q_i` be the order quantity for item `i`
+- `u_ik` be shortage for item `i` under demand scenario `k`
+- `o_ik` be leftover inventory for item `i` under scenario `k`
+- `d_ik` be simulated demand
+- `π_k` be the probability of scenario `k`
+- `c_i` be estimated procurement cost
+- `B` be the purchasing budget
+- `C` be storage capacity
 
 The objective is:
 
-$$
+```math
 \min_{q,u,o}
 \sum_k \pi_k
 \sum_i
 \left(
 5u_{ik}+o_{ik}
-\right).
-$$
+\right)
+```
 
 Shortage is represented by:
 
-$$
-u_{ik}\geq d_{ik}-q_i.
-$$
+```math
+u_{ik}\geq d_{ik}-q_i
+```
 
 Leftover inventory is represented by:
 
-$$
-o_{ik}\geq q_i-d_{ik}.
-$$
+```math
+o_{ik}\geq q_i-d_{ik}
+```
 
 The purchasing-budget constraint is:
 
-$$
-\sum_i c_iq_i\leq B.
-$$
+```math
+\sum_i c_iq_i\leq B
+```
 
 The storage-capacity constraint is:
 
-$$
-\sum_i q_i\leq C.
-$$
+```math
+\sum_i q_i\leq C
+```
 
 Order quantities must be nonnegative integers:
 
-$$
-q_i\in\mathbb{Z}_{\geq0}.
-$$
+```math
+q_i\in\mathbb{Z}_{\geq0}
+```
 
 Five discrete demand scenarios are used:
 
-- very low;
-- low;
-- central;
-- high;
-- very high.
+- very low
+- low
+- central
+- high
+- very high
 
 Actual holdout demand is excluded from the optimisation and used only after solving to evaluate the completed allocations.
 
@@ -624,23 +591,23 @@ Actual holdout demand is excluded from the optimisation and used only after solv
 
 ## Evaluation Metrics
 
-### Forecasting metrics
+### Forecasting Metrics
 
 #### Mean Absolute Error
 
-$$
+```math
 \operatorname{MAE}
 =
 \frac{1}{n}
 \sum_{i=1}^{n}
 \left|
 \widehat{y}_i-y_i
-\right|.
-$$
+\right|
+```
 
 #### Root Mean Squared Error
 
-$$
+```math
 \operatorname{RMSE}
 =
 \sqrt{
@@ -649,26 +616,26 @@ $$
 \left(
 \widehat{y}_i-y_i
 \right)^2
-}.
-$$
+}
+```
 
 #### Bias
 
-$$
+```math
 \operatorname{Bias}
 =
 \frac{1}{n}
 \sum_{i=1}^{n}
 \left(
 \widehat{y}_i-y_i
-\right).
-$$
+\right)
+```
 
 A positive value indicates overforecasting, while a negative value indicates underforecasting.
 
 #### Weighted Absolute Percentage Error
 
-$$
+```math
 \operatorname{WAPE}
 =
 \frac{
@@ -682,66 +649,64 @@ $$
 y_i
 \right|
 }
-\times100.
-$$
+\times 100
+```
 
----
-
-### Inventory metrics
+### Inventory Metrics
 
 The inventory evaluation reports:
 
-- ordered units;
-- served units;
-- shortage units;
-- leftover units;
-- fill rate;
-- percentage of product-store series with stockouts;
-- holding cost;
-- shortage cost;
-- total operating cost;
-- budget utilisation;
-- capacity utilisation.
+- ordered units
+- served units
+- shortage units
+- leftover units
+- fill rate
+- percentage of product-store series with stockouts
+- holding cost
+- shortage cost
+- total operating cost
+- budget utilisation
+- capacity utilisation
 
 The fill rate is:
 
-$$
+```math
 \operatorname{FillRate}
 =
 \frac{\text{served units}}
 {\text{actual demand units}}
-\times100.
-$$
+\times 100
+```
 
 Operating cost is defined as:
 
-$$
+```math
 \text{Operating cost}
 =
 5\times\text{shortage units}
 +
-1\times\text{leftover units}.
-$$
+1\times\text{leftover units}
+```
 
 Budget utilisation is:
 
-$$
+```math
 \text{Budget utilisation}
 =
 \frac{\text{purchase spend}}
 {\text{budget limit}}
-\times100.
-$$
+\times 100
+```
 
 Capacity utilisation is:
 
-$$
+```math
 \text{Capacity utilisation}
 =
 \frac{\text{allocated order units}}
 {\text{capacity limit}}
-\times100.
-$$
+\times 100
+```
 
 ---
 
@@ -807,14 +772,14 @@ retail-demand-inventory-optimizer/
 
 ## Reproducing the Project
 
-### 1. Clone the repository
+### 1. Clone the Repository
 
 ```powershell
 git clone https://github.com/mhduah/retail-demand-inventory-optimizer.git
 cd retail-demand-inventory-optimizer
 ```
 
-### 2. Create a virtual environment
+### 2. Create a Virtual Environment
 
 ```powershell
 python -m venv .venv
@@ -826,13 +791,13 @@ Activate it in PowerShell:
 .venv\Scripts\Activate.ps1
 ```
 
-### 3. Install dependencies
+### 3. Install Dependencies
 
 ```powershell
 pip install -r requirements.txt
 ```
 
-### 4. Add the raw M5 files
+### 4. Add the Raw M5 Files
 
 Place the following files in:
 
@@ -848,7 +813,7 @@ sales_train_evaluation.csv
 sell_prices.csv
 ```
 
-### 5. Run the complete pipeline
+### 5. Run the Complete Pipeline
 
 ```powershell
 python src\data_validation.py
@@ -873,26 +838,26 @@ python src\create_portfolio_visuals.py
 
 The project includes automated or explicit checks for:
 
-- required raw files;
-- expected row and column counts;
-- valid product and store dimensions;
-- unique primary keys;
-- unique composite keys;
-- complete chronological coverage;
-- nonnegative integer sales;
-- foreign-key consistency;
-- valid selling prices;
-- complete product-store coverage;
-- holdout-period isolation;
-- missing feature values;
-- recursive forecasting without future information;
-- matching actual demand across forecast files;
-- nonnegative predictions;
-- budget compliance;
-- capacity compliance;
-- solver success;
-- operating-cost identities;
-- correct aggregation of store-level resource limits.
+- required raw files
+- expected row and column counts
+- valid product and store dimensions
+- unique primary keys
+- unique composite keys
+- complete chronological coverage
+- nonnegative integer sales
+- foreign-key consistency
+- valid selling prices
+- complete product-store coverage
+- holdout-period isolation
+- missing feature values
+- recursive forecasting without future information
+- matching actual demand across forecast files
+- nonnegative predictions
+- budget compliance
+- capacity compliance
+- solver success
+- operating-cost identities
+- correct aggregation of store-level resource limits
 
 ---
 
@@ -913,19 +878,19 @@ The project includes automated or explicit checks for:
 
 Future improvements could include:
 
-- expanding the pipeline to all M5 products and stores;
-- rolling-origin evaluation across multiple holdout periods;
-- probabilistic forecasting;
-- quantile gradient boosting;
-- hierarchical forecast reconciliation;
-- Croston-style intermittent-demand models;
-- product-specific shortage and holding costs;
-- supplier lead times;
-- minimum order quantities;
-- product-volume-based warehouse capacity;
-- multi-period inventory optimisation;
-- a Streamlit or Power BI decision dashboard;
-- automated model retraining and monitoring.
+- expanding the pipeline to all M5 products and stores
+- rolling-origin evaluation across multiple holdout periods
+- probabilistic forecasting
+- quantile gradient boosting
+- hierarchical forecast reconciliation
+- Croston-style intermittent-demand models
+- product-specific shortage and holding costs
+- supplier lead times
+- minimum order quantities
+- product-volume-based warehouse capacity
+- multi-period inventory optimisation
+- a Streamlit or Power BI decision dashboard
+- automated model retraining and monitoring
 
 ---
 
@@ -933,20 +898,20 @@ Future improvements could include:
 
 This project demonstrates the ability to:
 
-- structure a complete analytics problem from raw data to business decision;
-- design relational data models;
-- write analytical SQL;
-- build reproducible Python data pipelines;
-- implement leakage-safe time-series validation;
-- engineer lag, rolling, calendar, and price features;
-- compare statistical and machine-learning models honestly;
-- work with intermittent retail demand;
-- translate forecasts into inventory decisions;
-- formulate deterministic and stochastic MILPs;
-- diagnose objective-function mismatch;
-- validate solver output and business metrics;
-- communicate technical results through business-focused visualisations;
-- use Git and GitHub for version-controlled project development.
+- structure a complete analytics problem from raw data to business decision
+- design relational data models
+- write analytical SQL
+- build reproducible Python data pipelines
+- implement leakage-safe time-series validation
+- engineer lag, rolling, calendar, and price features
+- compare statistical and machine-learning models honestly
+- work with intermittent retail demand
+- translate forecasts into inventory decisions
+- formulate deterministic and stochastic MILPs
+- diagnose objective-function mismatch
+- validate solver output and business metrics
+- communicate technical results through business-focused visualisations
+- use Git and GitHub for version-controlled project development
 
 ---
 
@@ -954,7 +919,7 @@ This project demonstrates the ability to:
 
 **Michael Hubert Duah**
 
-M.Sc. Mathematics — Mathematical Data Science  
+Master's student in Mathematics — Mathematical Data Science  
 Georg-August-Universität Göttingen
 
 - GitHub: [mhduah](https://github.com/mhduah)
