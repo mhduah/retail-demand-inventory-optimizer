@@ -847,8 +847,14 @@ def add_summary_metrics(
 def summarize_results(
     results: pd.DataFrame,
     grouping_columns: list[str],
+    limit_aggregation: str,
 ) -> pd.DataFrame:
     """Summarise allocation performance."""
+
+    if limit_aggregation not in {"first", "sum"}:
+        raise ValueError(
+            "limit_aggregation must be 'first' or 'sum'."
+        )
 
     summary = (
         results.groupby(
@@ -906,11 +912,11 @@ def summarize_results(
             ),
             budget_limit=(
                 "budget_limit",
-                "first",
+                 limit_aggregation,
             ),
             capacity_limit=(
                 "capacity_limit",
-                "first",
+                limit_aggregation,
             ),
         )
         .reset_index()
@@ -1163,6 +1169,7 @@ def main() -> None:
             "allocation_method",
             "store_id",
         ],
+        limit_aggregation="first",
     )
 
     overall_summary = summarize_results(
@@ -1171,6 +1178,7 @@ def main() -> None:
             "scenario",
             "allocation_method",
         ],
+        limit_aggregation="sum"
     )
 
     solver_status = pd.DataFrame(
