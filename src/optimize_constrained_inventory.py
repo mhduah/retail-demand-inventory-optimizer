@@ -753,15 +753,20 @@ def evaluate_allocation(
         shortage > 0
     ).astype("int8")
 
-    result["fill_rate_percent"] = np.where(
-        actual == 0,
-        100.0,
-        served / actual * 100,
+    fill_rate_ratio = np.ones_like(
+        actual,
+        dtype=float,
     )
 
-    result["holding_cost_units"] = (
-        leftover
-        * HOLDING_COST_PER_UNIT
+    np.divide(
+        served,
+        actual,
+        out=fill_rate_ratio,
+        where=actual > 0,
+    )
+
+    result["fill_rate_percent"] = (
+        100.0 * fill_rate_ratio
     )
 
     result["shortage_cost_units"] = (
