@@ -198,10 +198,17 @@ def create_sales_tables(
         downcast="integer",
     )
 
+    sales_fact["day_number"] = (
+    sales_fact["day_id"]
+    .str.removeprefix("d_")
+    .astype("int32")
+    )
+
     sales_fact = (
         sales_fact.sort_values(
-            ["store_id", "item_id", "day_id"]
+            ["store_id", "item_id", "day_number"]
         )
+        .drop(columns="day_number")
         .reset_index(drop=True)
     )
 
