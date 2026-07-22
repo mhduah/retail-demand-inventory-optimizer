@@ -1,0 +1,5 @@
+model,mae,rmse,bias,wape_percent
+adaptive_baseline,1.1616,2.1385,-0.3774,75.1529
+hist_gradient_boosting,1.1812,1.9234,0.0029,76.4161
+weekly_seasonal_naive,1.3119,2.351,-0.2038,84.8737
+last_value_naive,1.5114,2.6461,0.261,97.7819
