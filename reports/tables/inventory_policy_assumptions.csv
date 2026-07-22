@@ -1,0 +1,8 @@
+assumption,value
+forecast_horizon_days,28
+uncertainty_lookback_days,365
+holding_cost_per_leftover_unit,1.0
+shortage_cost_per_unserved_unit,5.0
+critical_ratio,0.8333
+normal_service_factor,0.9674
+cost_unit_interpretation,"Relative cost units, not currency"

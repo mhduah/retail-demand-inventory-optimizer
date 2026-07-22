@@ -1,0 +1,13 @@
+store_id,forecast_model,inventory_policy,number_of_series,forecast_units,actual_demand_units,ordered_units,served_units,shortage_units,leftover_units,stockout_series,holding_cost_units,shortage_cost_units,total_cost_units,fill_rate_percent,stockout_series_percent,average_cost_per_series
+CA_1,adaptive_baseline,newsvendor_adjusted_order,50,2214.0,2525.0,3444,2236.0,289.0,1208.0,21,1208.0,1445.0,2653.0,88.55,42.0,53.06
+CA_1,adaptive_baseline,point_forecast_order,50,2214.0,2525.0,2215,1853.0,672.0,362.0,34,362.0,3360.0,3722.0,73.39,68.0,74.44
+CA_1,hist_gradient_boosting,newsvendor_adjusted_order,50,2698.91,2525.0,3928,2486.0,39.0,1442.0,2,1442.0,195.0,1637.0,98.46,4.0,32.74
+CA_1,hist_gradient_boosting,point_forecast_order,50,2698.91,2525.0,2722,2323.0,202.0,399.0,17,399.0,1010.0,1409.0,92.0,34.0,28.18
+TX_1,adaptive_baseline,newsvendor_adjusted_order,50,776.0,1338.0,1554,1135.0,203.0,419.0,26,419.0,1015.0,1434.0,84.83,52.0,28.68
+TX_1,adaptive_baseline,point_forecast_order,50,776.0,1338.0,777,693.0,645.0,84.0,41,84.0,3225.0,3309.0,51.79,82.0,66.18
+TX_1,hist_gradient_boosting,newsvendor_adjusted_order,50,1445.4,1338.0,2226,1328.0,10.0,898.0,2,898.0,50.0,948.0,99.25,4.0,18.96
+TX_1,hist_gradient_boosting,point_forecast_order,50,1445.4,1338.0,1471,1146.0,192.0,325.0,16,325.0,960.0,1285.0,85.65,32.0,25.7
+WI_1,adaptive_baseline,newsvendor_adjusted_order,50,1917.0,2629.0,2952,2237.0,392.0,715.0,24,715.0,1960.0,2675.0,85.09,48.0,53.5
+WI_1,adaptive_baseline,point_forecast_order,50,1917.0,2629.0,1920,1735.0,894.0,185.0,31,185.0,4470.0,4655.0,65.99,62.0,93.1
+WI_1,hist_gradient_boosting,newsvendor_adjusted_order,50,2360.03,2629.0,3394,2597.0,32.0,797.0,5,797.0,160.0,957.0,98.78,10.0,19.14
+WI_1,hist_gradient_boosting,point_forecast_order,50,2360.03,2629.0,2386,2190.0,439.0,196.0,24,196.0,2195.0,2391.0,83.3,48.0,47.82

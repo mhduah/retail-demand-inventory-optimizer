@@ -1,0 +1,5 @@
+forecast_model,inventory_policy,number_of_series,forecast_units,actual_demand_units,ordered_units,served_units,shortage_units,leftover_units,stockout_series,holding_cost_units,shortage_cost_units,total_cost_units,fill_rate_percent,stockout_series_percent,average_cost_per_series
+adaptive_baseline,newsvendor_adjusted_order,150,4907.0,6492.0,7950,5608.0,884.0,2342.0,71,2342.0,4420.0,6762.0,86.38,47.33,45.08
+adaptive_baseline,point_forecast_order,150,4907.0,6492.0,4912,4281.0,2211.0,631.0,106,631.0,11055.0,11686.0,65.94,70.67,77.91
+hist_gradient_boosting,newsvendor_adjusted_order,150,6504.35,6492.0,9548,6411.0,81.0,3137.0,9,3137.0,405.0,3542.0,98.75,6.0,23.61
+hist_gradient_boosting,point_forecast_order,150,6504.35,6492.0,6579,5659.0,833.0,920.0,57,920.0,4165.0,5085.0,87.17,38.0,33.9
