@@ -1,0 +1,7 @@
+store_id,best_model,series_won
+CA_1,last_value_naive,25
+CA_1,weekly_seasonal_naive,25
+TX_1,last_value_naive,39
+TX_1,weekly_seasonal_naive,11
+WI_1,last_value_naive,27
+WI_1,weekly_seasonal_naive,23

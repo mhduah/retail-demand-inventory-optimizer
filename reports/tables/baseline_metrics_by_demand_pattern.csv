@@ -1,0 +1,9 @@
+model,demand_pattern,validation_actual_units,validation_forecast_units,mae,rmse,bias,wape_percent,number_of_series
+last_value_naive,highly_intermittent,602.0,840.0,0.6744,1.16,0.1977,134.8837,43
+last_value_naive,intermittent,2377.0,2660.0,1.3637,2.3236,0.1424,114.0513,71
+last_value_naive,mixed,2973.0,3416.0,2.6943,3.9342,0.4653,86.2765,34
+last_value_naive,regular,540.0,672.0,4.6429,6.4365,2.3571,48.1481,2
+weekly_seasonal_naive,highly_intermittent,602.0,624.0,0.5897,1.0573,0.0183,117.9402,43
+weekly_seasonal_naive,intermittent,2377.0,1936.0,1.2389,2.1981,-0.2218,103.618,71
+weekly_seasonal_naive,mixed,2973.0,2592.0,2.2342,3.3984,-0.4002,71.5439,34
+weekly_seasonal_naive,regular,540.0,484.0,3.75,4.7585,-1.0,38.8889,2
