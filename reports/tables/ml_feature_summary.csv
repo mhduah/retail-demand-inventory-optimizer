@@ -1,0 +1,8 @@
+metric,value
+training_rows,282750
+product_store_series,150
+training_start_date,2011-02-26
+training_end_date,2016-04-24
+holdout_start_date,2016-04-25
+feature_columns,19
+missing_feature_values,0
