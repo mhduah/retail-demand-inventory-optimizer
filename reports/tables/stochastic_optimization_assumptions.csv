@@ -1,0 +1,11 @@
+assumption,value
+stochastic_objective,Expected shortage cost plus expected holding cost
+shortage_cost_per_unit,5.0
+holding_cost_per_unit,1.0
+minimum_target_coverage,0.4
+actual_holdout_usage,Evaluation only; excluded from optimisation
+demand_scenario_very_low,"z=-1.2816, probability=0.1"
+demand_scenario_low,"z=-0.5244, probability=0.2"
+demand_scenario_central,"z=0.0, probability=0.4"
+demand_scenario_high,"z=0.5244, probability=0.2"
+demand_scenario_very_high,"z=1.2816, probability=0.1"

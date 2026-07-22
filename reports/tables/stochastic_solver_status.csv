@@ -1,0 +1,10 @@
+constraint_scenario,store_id,solver_success,solver_status,solver_message,expected_objective_cost,allocated_units,allocated_spend,budget_limit,capacity_limit
+balanced,CA_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),1320.2016322079946,3188,4175.214,4175.23584,3338.0
+balanced,TX_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),779.4131173359999,1796,2109.6972,2109.72672,1892.0
+balanced,WI_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),1085.6999501040002,2792,3696.7116,3696.76896,2884.0
+near_full,CA_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),1193.570920928,3358,4532.578799999999,4958.092559999999,3731.0
+near_full,TX_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),736.298490216,1861,2256.3072,2505.30048,2114.0
+near_full,WI_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),998.7544384560001,2918,3989.7444,4389.91314,3224.0
+tight,CA_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),2169.581764208,2668,3392.3724,3392.37912,2749.0
+tight,TX_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),1164.454290296,1518,1714.1423999999997,1714.15296,1558.0
+tight,WI_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),1726.80372868,2349,3003.6132,3003.62478,2375.0

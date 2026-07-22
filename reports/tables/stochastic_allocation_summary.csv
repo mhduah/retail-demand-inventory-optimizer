@@ -1,0 +1,10 @@
+scenario,allocation_method,number_of_series,target_order_units,allocated_order_units,actual_demand_units,served_units,shortage_units,leftover_units,stockout_series,purchase_spend,holding_cost_units,shortage_cost_units,operational_cost_units,budget_limit,capacity_limit,fill_rate_percent,stockout_series_percent,target_coverage_percent,budget_utilisation_percent,capacity_utilisation_percent,average_cost_per_series
+balanced,milp_optimised,150,9548,8114,6492.0,5764.0,728.0,2350.0,74,9713.62,2350.0,3640.0,5990.0,4175.24,3338,88.79,49.33,84.98,232.65,243.08,39.93
+balanced,proportional_heuristic,150,9548,7676,6492.0,6004.0,488.0,1672.0,43,9981.45,1672.0,2440.0,4112.0,4175.24,3338,92.48,28.67,80.39,239.06,229.96,27.41
+balanced,stochastic_expected_cost_milp,150,9548,7776,6492.0,6054.0,438.0,1722.0,38,9981.62,1722.0,2190.0,3912.0,4175.24,3338,93.25,25.33,81.44,239.07,232.95,26.08
+near_full,milp_optimised,150,9548,9069,6492.0,6257.0,235.0,2812.0,39,11510.84,2812.0,1175.0,3987.0,4958.09,3731,96.38,26.0,94.98,232.16,243.07,26.58
+near_full,proportional_heuristic,150,9548,9069,6492.0,6355.0,137.0,2714.0,15,11811.24,2714.0,685.0,3399.0,4958.09,3731,97.89,10.0,94.98,238.22,243.07,22.66
+near_full,stochastic_expected_cost_milp,150,9548,8137,6492.0,6193.0,299.0,1944.0,28,10778.63,1944.0,1495.0,3439.0,4958.09,3731,95.39,18.67,85.22,217.39,218.09,22.93
+tight,milp_optimised,150,9548,6682,6492.0,5013.0,1479.0,1669.0,107,7628.07,1669.0,7395.0,9064.0,3392.38,2749,77.22,71.33,69.98,224.86,243.07,60.43
+tight,proportional_heuristic,150,9548,6252,6492.0,5337.0,1155.0,915.0,71,8110.03,915.0,5775.0,6690.0,3392.38,2749,82.21,47.33,65.48,239.07,227.43,44.6
+tight,stochastic_expected_cost_milp,150,9548,6535,6492.0,5539.0,953.0,996.0,68,8110.13,996.0,4765.0,5761.0,3392.38,2749,85.32,45.33,68.44,239.07,237.72,38.41
