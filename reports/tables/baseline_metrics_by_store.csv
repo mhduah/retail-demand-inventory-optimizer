@@ -1,0 +1,7 @@
+model,store_id,mae,rmse,bias,wape_percent
+last_value_naive,TX_1,0.88,1.7163,-0.2357,92.0777
+last_value_naive,WI_1,1.8236,3.0846,0.2221,97.1092
+last_value_naive,CA_1,1.8307,2.9232,0.7964,101.505
+weekly_seasonal_naive,TX_1,0.9057,1.7431,-0.1786,94.7683
+weekly_seasonal_naive,CA_1,1.4679,2.4592,-0.1436,81.3861
+weekly_seasonal_naive,WI_1,1.5621,2.7377,-0.2893,83.1875
