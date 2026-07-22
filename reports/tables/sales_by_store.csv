@@ -1,0 +1,4 @@
+store_id,state_id,total_units_sold,average_units_per_product_day,zero_sales_records,zero_sales_percentage
+CA_1,CA,145352,1.498,56517,58.23
+WI_1,WI,120937,1.246,62798,64.71
+TX_1,TX,97384,1.003,66667,68.69
