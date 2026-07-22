@@ -1,0 +1,6 @@
+finding,value_percent,interpretation
+Gradient boosting RMSE reduction versus adaptive baseline,10.06,The pooled model reduced large forecasting errors.
+Gradient boosting MAE change versus adaptive baseline,-1.69,Negative value means the adaptive baseline retained slightly lower MAE.
+ML newsvendor cost reduction versus ML point ordering,30.34,Safety-stock optimisation improved inventory operating cost.
+Stochastic MILP cost reduction under tight constraints,13.89,Optimisation added the most value when resources were scarce.
+Stochastic MILP cost reduction under balanced constraints,4.86,Optimisation provided a smaller but positive gain under balanced limits.
