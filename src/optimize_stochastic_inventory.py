@@ -926,6 +926,156 @@ def summarize_results(
         summary
     )
 
+def summarize_overall_results(
+    results: pd.DataFrame,
+) -> pd.DataFrame:
+    """Summarise results while counting each store limit once."""
+
+    grouping_columns = [
+        "scenario",
+        "allocation_method",
+    ]
+
+    performance_summary = (
+        results.groupby(
+            grouping_columns,
+            sort=True,
+        )
+        .agg(
+            number_of_series=(
+                "item_id",
+                "size",
+            ),
+            target_order_units=(
+                "target_order_quantity",
+                "sum",
+            ),
+            allocated_order_units=(
+                "allocated_order_quantity",
+                "sum",
+            ),
+            actual_demand_units=(
+                "actual_demand_units",
+                "sum",
+            ),
+            served_units=(
+                "served_units",
+                "sum",
+            ),
+            shortage_units=(
+                "shortage_units",
+                "sum",
+            ),
+            leftover_units=(
+                "leftover_units",
+                "sum",
+            ),
+            stockout_series=(
+                "stockout_occurred",
+                "sum",
+            ),
+            purchase_spend=(
+                "purchase_spend",
+                "sum",
+            ),
+            holding_cost_units=(
+                "holding_cost_units",
+                "sum",
+            ),
+            shortage_cost_units=(
+                "shortage_cost_units",
+                "sum",
+            ),
+            operational_cost_units=(
+                "operational_cost_units",
+                "sum",
+            ),
+        )
+        .reset_index()
+    )
+
+    limit_columns = [
+        "scenario",
+        "allocation_method",
+        "store_id",
+        "budget_limit",
+        "capacity_limit",
+    ]
+
+    limit_rows = results[
+        limit_columns
+    ].drop_duplicates()
+
+    key_columns = [
+        "scenario",
+        "allocation_method",
+        "store_id",
+    ]
+
+    inconsistent_limits = (
+        limit_rows.groupby(
+            key_columns
+        )[
+            [
+                "budget_limit",
+                "capacity_limit",
+            ]
+        ]
+        .nunique()
+        .gt(1)
+        .any(axis=1)
+    )
+
+    if inconsistent_limits.any():
+        raise ValueError(
+            "Multiple budget or capacity limits were found "
+            "for the same scenario, method, and store."
+        )
+
+    limit_rows = (
+        limit_rows.drop_duplicates(
+            subset=key_columns
+        )
+    )
+
+    overall_limits = (
+        limit_rows.groupby(
+            grouping_columns,
+            sort=True,
+        )
+        .agg(
+            budget_limit=(
+                "budget_limit",
+                "sum",
+            ),
+            capacity_limit=(
+                "capacity_limit",
+                "sum",
+            ),
+        )
+        .reset_index()
+    )
+
+    summary = performance_summary.merge(
+        overall_limits,
+        on=grouping_columns,
+        how="left",
+        validate="one_to_one",
+    )
+
+    if summary[
+        [
+            "budget_limit",
+            "capacity_limit",
+        ]
+    ].isna().any().any():
+        raise ValueError(
+            "Overall budget or capacity limits are missing."
+        )
+
+    return add_summary_metrics(
+        summary
+    )
 
 def create_assumptions_table() -> pd.DataFrame:
     """Create tracked stochastic-model assumptions."""
@@ -1172,14 +1322,10 @@ def main() -> None:
         limit_aggregation="first",
     )
 
-    overall_summary = summarize_results(
-        combined_results,
-        [
-            "scenario",
-            "allocation_method",
-        ],
-        limit_aggregation="sum"
+    overall_summary = summarize_overall_results(
+        combined_results
     )
+    
 
     solver_status = pd.DataFrame(
         solver_rows
