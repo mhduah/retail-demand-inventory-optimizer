@@ -769,6 +769,11 @@ def evaluate_allocation(
         100.0 * fill_rate_ratio
     )
 
+    result["holding_cost_units"] = (
+    leftover
+    * HOLDING_COST_PER_UNIT
+)
+
     result["shortage_cost_units"] = (
         shortage
         * SHORTAGE_COST_PER_UNIT
@@ -778,6 +783,20 @@ def evaluate_allocation(
         result["holding_cost_units"]
         + result["shortage_cost_units"]
     )
+
+    expected_operational_cost = (
+        leftover * HOLDING_COST_PER_UNIT
+        + shortage * SHORTAGE_COST_PER_UNIT
+    )
+
+    if not np.allclose(
+        result["operational_cost_units"].to_numpy(dtype=float),
+        expected_operational_cost,
+    ):
+        raise ValueError(
+            "Operational cost does not equal holding cost "
+            "plus shortage cost."
+        )
 
     result["purchase_spend"] = (
         result["allocated_order_quantity"]
