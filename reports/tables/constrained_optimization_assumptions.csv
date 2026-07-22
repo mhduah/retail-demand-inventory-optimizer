@@ -1,0 +1,15 @@
+assumption,value
+source_forecast_model,hist_gradient_boosting
+source_inventory_policy,newsvendor_adjusted_order
+procurement_cost_share_of_sell_price,0.6
+minimum_target_coverage,0.4
+holding_cost_per_unit,1.0
+shortage_cost_per_unit,5.0
+capacity_interpretation,Unit-count proxy because product volume data is unavailable
+cost_interpretation,Procurement spend is simulated; operational costs are relative units
+tight_budget_ratio,0.65
+tight_capacity_ratio,0.7
+balanced_budget_ratio,0.8
+balanced_capacity_ratio,0.85
+near_full_budget_ratio,0.95
+near_full_capacity_ratio,0.95

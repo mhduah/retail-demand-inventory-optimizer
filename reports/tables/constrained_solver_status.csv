@@ -1,0 +1,10 @@
+scenario,store_id,solver_success,solver_status,solver_message,objective_value
+tight,CA_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),1332.6338068219475
+tight,TX_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),716.9407467658335
+tight,WI_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),1144.6126722846716
+balanced,CA_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),637.833505691169
+balanced,TX_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),348.81707115913076
+balanced,WI_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),547.7745895628591
+near_full,CA_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),207.63825973951222
+near_full,TX_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),115.28589849997776
+near_full,WI_1,True,0,Optimization terminated successfully. (HiGHS Status 7: Optimal),177.8817453333194
