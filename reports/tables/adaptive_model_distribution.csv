@@ -1,0 +1,15 @@
+store_id,selected_model,number_of_series
+CA_1,zero_forecast,20
+CA_1,mean_28_days,15
+CA_1,mean_7_days,10
+CA_1,last_value_naive,5
+TX_1,zero_forecast,33
+TX_1,mean_7_days,9
+TX_1,mean_28_days,5
+TX_1,last_value_naive,2
+TX_1,weekly_seasonal_naive,1
+WI_1,zero_forecast,21
+WI_1,mean_28_days,13
+WI_1,mean_7_days,13
+WI_1,weekly_seasonal_naive,2
+WI_1,last_value_naive,1
