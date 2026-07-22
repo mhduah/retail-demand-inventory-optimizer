@@ -1,0 +1,13 @@
+file_name,table_name,row_count,column_count,grain
+dim_store.csv,dim_store,3,3,One row per store
+dim_item.csv,dim_item,50,4,One row per product
+dim_date.csv,dim_date,1941,21,One row per calendar day
+dim_model.csv,dim_model,4,4,One row per forecast model
+dim_inventory_policy.csv,dim_inventory_policy,2,4,One row per inventory policy
+dim_constraint_scenario.csv,dim_constraint_scenario,3,5,One row per resource-constraint scenario
+dim_allocation_method.csv,dim_allocation_method,3,4,One row per inventory-allocation method
+fact_actual_daily.csv,fact_actual_daily,4200,6,"One row per store, product, and holdout day"
+fact_actual_horizon.csv,fact_actual_horizon,150,6,One row per store and product for the 28-day holdout
+fact_forecast_daily.csv,fact_forecast_daily,16800,10,"One row per model, store, product, and holdout day"
+fact_inventory_policy.csv,fact_inventory_policy,600,16,"One row per model, policy, store, and product"
+fact_constrained_allocation.csv,fact_constrained_allocation,1350,22,"One row per constraint scenario, allocation method, store, and product"

@@ -1,0 +1,4 @@
+allocation_method_id,allocation_method_name,method_family,display_order
+proportional_heuristic,Proportional heuristic,Heuristic,1
+milp_optimised,Target-shortfall MILP,Deterministic optimisation,2
+stochastic_expected_cost_milp,Stochastic expected-cost MILP,Stochastic optimisation,3

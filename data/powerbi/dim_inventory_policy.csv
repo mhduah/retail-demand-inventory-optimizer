@@ -1,0 +1,3 @@
+policy_id,policy_name,uses_safety_stock,display_order
+point_forecast_order,Point-forecast order,0,1
+newsvendor_adjusted_order,Newsvendor-adjusted order,1,2

@@ -1,0 +1,5 @@
+model_id,model_name,model_family,display_order
+last_value_naive,Last-value naïve,Statistical baseline,1
+weekly_seasonal_naive,Weekly seasonal naïve,Statistical baseline,2
+adaptive_baseline,Adaptive baseline,Backtest-selected baseline,3
+hist_gradient_boosting,Histogram gradient boosting,Machine learning,4
