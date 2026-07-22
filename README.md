@@ -1,6 +1,6 @@
 # Retail Demand Forecasting and Inventory Optimisation
 
-An end-to-end data science and operations research project that forecasts retail demand and allocates inventory under purchasing-budget and storage-capacity constraints.
+An end-to-end data science and operations research project that forecasts retail demand, converts forecasts into inventory decisions, and allocates limited stock under purchasing-budget and storage-capacity constraints.
 
 The project combines:
 
@@ -13,7 +13,7 @@ The project combines:
 - stochastic optimisation
 - business-focused evaluation and visualisation
 
-The objective is not only to improve forecast accuracy, but also to determine which forecasting and optimisation decisions produce the lowest operating cost and highest customer service level.
+The objective is not merely to produce accurate forecasts. It is to determine which forecasting and optimisation decisions produce the best balance between customer service, stockouts, excess inventory, and operating cost.
 
 ---
 
@@ -21,23 +21,21 @@ The objective is not only to improve forecast accuracy, but also to determine wh
 
 Retail inventory decisions involve a fundamental trade-off:
 
-- ordering too little creates stockouts, lost sales and poor service;
-- ordering too much creates excess stock, holding costs and tied-up capital.
+- Ordering too little creates stockouts, lost sales, and poor customer service.
+- Ordering too much creates excess stock, holding costs, and tied-up capital.
 
 This project builds a complete decision pipeline from raw retail data to constrained inventory allocation.
 
-The main findings are:
+### Headline results
 
 - Gradient boosting reduced forecast RMSE by **10.06%** compared with the adaptive baseline.
-- The machine-learning forecast had almost no systematic bias: **0.0029**.
-- A newsvendor policy reduced inventory operating cost by **30.34%** compared with ordering only the machine-learning point forecast.
-- A stochastic expected-cost MILP reduced cost by **13.89%** under tight resource constraints.
-- The stochastic MILP reduced cost by **4.86%** under balanced constraints.
+- The machine-learning forecast achieved an almost unbiased result, with a bias of **0.0029**.
+- A newsvendor safety-stock policy reduced operating cost by **30.34%** compared with ordering only the machine-learning point forecast.
+- A stochastic expected-cost MILP reduced operating cost by **13.89%** under tight constraints.
+- The stochastic MILP reduced operating cost by **4.86%** under balanced constraints.
 - Under near-full resources, a simpler proportional allocation remained marginally better.
 
-The central business conclusion is:
-
-> Stochastic optimisation adds the most value when purchasing budget and storage capacity are scarce. Simpler allocation rules can remain competitive when resource constraints are loose.
+> **Business conclusion:** Stochastic optimisation adds the most value when purchasing budget and storage capacity are scarce. Simpler allocation rules can remain competitive when resource constraints are loose.
 
 ---
 
@@ -69,7 +67,7 @@ This project addresses three connected questions:
 
 ## Key Results
 
-### 1. Forecasting Performance
+### 1. Forecasting performance
 
 Four forecasting approaches were evaluated on an untouched 28-day holdout period:
 
@@ -89,7 +87,7 @@ Compared with the adaptive baseline, the gradient-boosting model:
 
 - reduced RMSE by **10.06%**;
 - almost eliminated systematic forecast bias;
-- produced slightly higher MAE by **1.69%**.
+- produced a slightly higher MAE of **1.69%**.
 
 This means that the adaptive baseline made slightly smaller typical errors, while the machine-learning model was more effective at reducing large errors and systematic underforecasting.
 
@@ -99,7 +97,7 @@ This means that the adaptive baseline made slightly smaller typical errors, whil
 
 ---
 
-### 2. Forecast-Driven Inventory Planning
+### 2. Forecast-driven inventory planning
 
 The forecasting models were converted into inventory decisions using two policies:
 
@@ -115,25 +113,25 @@ The forecasting models were converted into inventory decisions using two policie
 
 Using machine-learning forecasts with a newsvendor safety-stock policy reduced operating cost from:
 
-\[
-5{,}085 \rightarrow 3{,}542
-\]
+$$
+5{,}085 \longrightarrow 3{,}542
+$$
 
-This represents a:
+The corresponding percentage reduction is:
 
-\[
-30.34\%
-\]
-
-reduction compared with ordering only the machine-learning point forecast.
+$$
+\frac{5{,}085-3{,}542}{5{,}085}\times 100
+=
+30.34\%.
+$$
 
 ![Inventory policy comparison](reports/figures/inventory_policy_cost_comparison.png)
 
 ---
 
-### 3. Inventory Allocation Under Resource Constraints
+### 3. Inventory allocation under resource constraints
 
-The unconstrained machine-learning newsvendor order plan required 9,548 units. Three resource scenarios were therefore introduced:
+The unconstrained machine-learning newsvendor plan required 9,548 units. Three resource scenarios were therefore introduced.
 
 | Scenario | Purchasing budget | Storage capacity |
 |---|---:|---:|
@@ -157,13 +155,11 @@ Three allocation approaches were compared:
 
 The stochastic MILP reduced operating cost by:
 
-\[
-\frac{6{,}690-5{,}761}{6{,}690}\times100
+$$
+\frac{6{,}690-5{,}761}{6{,}690}\times 100
 =
-13.89\%
-\]
-
-compared with proportional allocation.
+13.89\%.
+$$
 
 #### Balanced constraints
 
@@ -175,11 +171,11 @@ compared with proportional allocation.
 
 The stochastic MILP reduced operating cost by:
 
-\[
-4.86\%
-\]
-
-compared with proportional allocation.
+$$
+\frac{4{,}112-3{,}912}{4{,}112}\times 100
+=
+4.86\%.
+$$
 
 #### Near-full constraints
 
@@ -204,7 +200,7 @@ The project uses a reproducible subset of the public M5 Forecasting dataset.
 The analytical subset contains:
 
 - 50 food products;
-- 3 stores: `CA_1`, `TX_1` and `WI_1`;
+- 3 stores: `CA_1`, `TX_1`, and `WI_1`;
 - 1,941 historical days;
 - 150 product-store demand series;
 - 291,150 daily sales records;
@@ -282,7 +278,7 @@ The raw-data validation stage checks:
 The project uses:
 
 - department `FOODS_3`;
-- stores `CA_1`, `TX_1` and `WI_1`;
+- stores `CA_1`, `TX_1`, and `WI_1`;
 - 50 products available across all three stores.
 
 The subset is transformed into a relational model containing:
@@ -358,7 +354,7 @@ Final model fitting
 Untouched 28-day evaluation
 ```
 
-No random train-test split is used because it would violate chronological ordering.
+No random train-test split is used because random splitting would violate chronological ordering.
 
 ---
 
@@ -372,7 +368,7 @@ The project evaluates:
 - trailing seven-day mean;
 - trailing 28-day mean.
 
-The weekly seasonal forecast repeats the most recent seven-day demand pattern over the 28-day forecast horizon.
+The weekly seasonal forecast repeats the most recent seven-day demand pattern across the 28-day forecast horizon.
 
 ---
 
@@ -386,8 +382,6 @@ For each series:
 2. candidate models are evaluated across four earlier 28-day backtesting windows;
 3. the model with the lowest historical MAE is selected;
 4. the selected model is evaluated on the final holdout.
-
-The adaptive procedure selected different models for different demand patterns and stores.
 
 Almost half of the series selected a zero-demand forecast, reflecting the strongly intermittent nature of the dataset.
 
@@ -417,7 +411,7 @@ The feature set includes:
 - month cycle;
 - event indicator;
 - SNAP indicator;
-- lagged demand at 1, 7, 14 and 28 days;
+- lagged demand at 1, 7, 14, and 28 days;
 - seven-day rolling mean;
 - seven-day rolling standard deviation;
 - seven-day zero-demand rate;
@@ -437,7 +431,7 @@ The machine-learning model forecasts the final 28 days recursively.
 The process is:
 
 1. predict the first holdout day;
-2. append the prediction to the demand history;
+2. append the prediction to the available demand history;
 3. construct the next day’s lag and rolling features;
 4. predict the next day;
 5. repeat for all 28 days.
@@ -454,17 +448,18 @@ This prevents look-ahead leakage and produces a realistic multi-step forecasting
 
 The point-forecast policy orders the rounded total predicted demand:
 
-\[
-q_i=
+$$
+q_i
+=
 \left\lceil
 \widehat{D}_i
-\right\rceil
-\]
+\right\rceil,
+$$
 
 where:
 
-- \(q_i\) is the order quantity for product-store series \(i\);
-- \(\widehat{D}_i\) is the predicted 28-day demand.
+- $q_i$ is the order quantity for product-store series $i$;
+- $\widehat{D}_i$ is predicted demand over the 28-day horizon.
 
 ---
 
@@ -472,120 +467,148 @@ where:
 
 Safety stock is added using:
 
-\[
-q_i=
+$$
+q_i
+=
 \left\lceil
 \widehat{D}_i+z\sigma_i
-\right\rceil
-\]
+\right\rceil,
+$$
 
 where:
 
-- \(\sigma_i\) is the estimated variability of historical 28-day demand;
-- \(z\) is determined by the shortage-to-holding-cost ratio.
+- $\sigma_i$ is the estimated variability of historical 28-day demand;
+- $z$ is the service factor determined by the shortage-to-holding-cost ratio.
 
 The project assumes:
 
-\[
+$$
 c_{\text{shortage}}=5
-\]
+$$
 
 and:
 
-\[
+$$
 c_{\text{holding}}=1.
-\]
+$$
 
-The critical ratio is:
+The corresponding critical ratio is:
 
-\[
-\frac{5}{5+1}=0.8333.
-\]
+$$
+\frac{c_{\text{shortage}}}
+{c_{\text{shortage}}+c_{\text{holding}}}
+=
+\frac{5}{5+1}
+=
+0.8333.
+$$
 
-These are relative operating-cost units rather than euros or dollars.
+These values represent relative operating-cost units rather than euros or dollars.
 
 ---
 
 ## Deterministic Constrained Allocation
 
-The first constrained MILP minimises weighted shortfalls from the unconstrained order targets:
+The first constrained MILP minimises weighted shortfalls from the unconstrained order targets.
 
-\[
-\min
-\sum_i w_i s_i
-\]
+Let:
 
-subject to:
+- $t_i$ be the unconstrained target quantity;
+- $q_i$ be the allocated order quantity;
+- $s_i$ be the shortfall from the target;
+- $c_i$ be the estimated procurement cost;
+- $B$ be the available purchasing budget;
+- $C$ be the available storage capacity;
+- $w_i$ be a product-priority weight.
 
-\[
+The objective is:
+
+$$
+\min_{q,s}
+\sum_i w_i s_i.
+$$
+
+The model is subject to:
+
+$$
 q_i+s_i=t_i,
-\]
+$$
 
-\[
+$$
 \sum_i c_iq_i\leq B,
-\]
+$$
 
-\[
-\sum_iq_i\leq C,
-\]
+$$
+\sum_i q_i\leq C,
+$$
 
-\[
+and:
+
+$$
 q_i\in\mathbb{Z}_{\geq0}.
-\]
+$$
 
 This model was feasible and mathematically correct, but it performed poorly on realised demand because its objective did not directly match the operating-cost evaluation function.
 
-This result demonstrates an important modelling lesson:
-
-> A mathematically optimal solution can still be a poor business decision when the optimisation objective does not represent the true business cost.
+> **Modelling lesson:** A mathematically optimal solution can still be a poor business decision when the optimisation objective does not represent the true business cost.
 
 ---
 
 ## Stochastic Expected-Cost Optimisation
 
-The improved stochastic MILP minimises expected shortage and holding costs across multiple demand scenarios:
+The improved stochastic MILP minimises expected shortage and holding costs across multiple demand scenarios.
 
-\[
-\min
+Let:
+
+- $q_i$ be the order quantity for item $i$;
+- $u_{ik}$ be the shortage for item $i$ under demand scenario $k$;
+- $o_{ik}$ be leftover inventory for item $i$ under scenario $k$;
+- $d_{ik}$ be simulated demand;
+- $\pi_k$ be the probability of scenario $k$;
+- $c_i$ be estimated procurement cost;
+- $B$ be the purchasing budget;
+- $C$ be storage capacity.
+
+The objective is:
+
+$$
+\min_{q,u,o}
 \sum_k \pi_k
 \sum_i
 \left(
 5u_{ik}+o_{ik}
-\right)
-\]
+\right).
+$$
 
-subject to:
+Shortage is represented by:
 
-\[
-u_{ik}\geq d_{ik}-q_i,
-\]
+$$
+u_{ik}\geq d_{ik}-q_i.
+$$
 
-\[
-o_{ik}\geq q_i-d_{ik},
-\]
+Leftover inventory is represented by:
 
-\[
-\sum_i c_iq_i\leq B,
-\]
+$$
+o_{ik}\geq q_i-d_{ik}.
+$$
 
-\[
-\sum_iq_i\leq C,
-\]
+The purchasing-budget constraint is:
 
-\[
+$$
+\sum_i c_iq_i\leq B.
+$$
+
+The storage-capacity constraint is:
+
+$$
+\sum_i q_i\leq C.
+$$
+
+Order quantities must be nonnegative integers:
+
+$$
 q_i\in\mathbb{Z}_{\geq0}.
-\]
-
-Where:
-
-- \(q_i\) is the order quantity;
-- \(u_{ik}\) is shortage for item \(i\) under demand scenario \(k\);
-- \(o_{ik}\) is leftover inventory;
-- \(d_{ik}\) is simulated demand;
-- \(\pi_k\) is the probability of scenario \(k\);
-- \(c_i\) is simulated procurement cost;
-- \(B\) is the purchasing budget;
-- \(C\) is storage capacity.
+$$
 
 Five discrete demand scenarios are used:
 
@@ -603,55 +626,55 @@ Actual holdout demand is excluded from the optimisation and used only after solv
 
 ### Forecasting metrics
 
-The project reports:
-
 #### Mean Absolute Error
 
-\[
+$$
 \operatorname{MAE}
 =
 \frac{1}{n}
 \sum_{i=1}^{n}
 \left|
-\widehat y_i-y_i
-\right|
-\]
+\widehat{y}_i-y_i
+\right|.
+$$
 
 #### Root Mean Squared Error
 
-\[
+$$
 \operatorname{RMSE}
 =
 \sqrt{
 \frac{1}{n}
 \sum_{i=1}^{n}
 \left(
-\widehat y_i-y_i
+\widehat{y}_i-y_i
 \right)^2
-}
-\]
+}.
+$$
 
 #### Bias
 
-\[
+$$
 \operatorname{Bias}
 =
 \frac{1}{n}
 \sum_{i=1}^{n}
 \left(
-\widehat y_i-y_i
-\right)
-\]
+\widehat{y}_i-y_i
+\right).
+$$
+
+A positive value indicates overforecasting, while a negative value indicates underforecasting.
 
 #### Weighted Absolute Percentage Error
 
-\[
+$$
 \operatorname{WAPE}
 =
 \frac{
 \sum_i
 \left|
-\widehat y_i-y_i
+\widehat{y}_i-y_i
 \right|
 }{
 \sum_i
@@ -659,8 +682,8 @@ The project reports:
 y_i
 \right|
 }
-\times100
-\]
+\times100.
+$$
 
 ---
 
@@ -680,15 +703,45 @@ The inventory evaluation reports:
 - budget utilisation;
 - capacity utilisation.
 
+The fill rate is:
+
+$$
+\operatorname{FillRate}
+=
+\frac{\text{served units}}
+{\text{actual demand units}}
+\times100.
+$$
+
 Operating cost is defined as:
 
-\[
+$$
 \text{Operating cost}
 =
 5\times\text{shortage units}
 +
 1\times\text{leftover units}.
-\]
+$$
+
+Budget utilisation is:
+
+$$
+\text{Budget utilisation}
+=
+\frac{\text{purchase spend}}
+{\text{budget limit}}
+\times100.
+$$
+
+Capacity utilisation is:
+
+$$
+\text{Capacity utilisation}
+=
+\frac{\text{allocated order units}}
+{\text{capacity limit}}
+\times100.
+$$
 
 ---
 
@@ -717,7 +770,7 @@ retail-demand-inventory-optimizer/
 |-- data/
 |   |-- raw/                  # Raw M5 files, ignored by Git
 |   |-- interim/              # Analytical subset, ignored by Git
-|   `-- processed/            # Database, feature table and model
+|   `-- processed/            # Database, feature table, and model
 |
 |-- reports/
 |   |-- figures/              # Portfolio visualisations
@@ -795,87 +848,22 @@ sales_train_evaluation.csv
 sell_prices.csv
 ```
 
-### 5. Validate the raw data
+### 5. Run the complete pipeline
 
 ```powershell
 python src\data_validation.py
-```
-
-### 6. Build the analytical subset
-
-```powershell
 python src\build_initial_dataset.py
-```
-
-### 7. Run the automated tests
-
-```powershell
 pytest
-```
-
-### 8. Build the SQLite database
-
-```powershell
 python src\load_to_sqlite.py
-```
-
-### 9. Export SQL business reports
-
-```powershell
 python src\export_business_reports.py
-```
-
-### 10. Run baseline forecasting
-
-```powershell
 python src\forecast_baseline.py
-```
-
-### 11. Analyse baseline errors
-
-```powershell
 python src\analyze_baseline_errors.py
-```
-
-### 12. Run adaptive model selection
-
-```powershell
 python src\adaptive_baseline.py
-```
-
-### 13. Build machine-learning features
-
-```powershell
 python src\build_ml_features.py
-```
-
-### 14. Train the pooled forecasting model
-
-```powershell
 python src\train_ml_model.py
-```
-
-### 15. Evaluate inventory policies
-
-```powershell
 python src\evaluate_inventory_policies.py
-```
-
-### 16. Run deterministic constrained allocation
-
-```powershell
 python src\optimize_constrained_inventory.py
-```
-
-### 17. Run stochastic optimisation
-
-```powershell
 python src\optimize_stochastic_inventory.py
-```
-
-### 18. Generate portfolio visualisations
-
-```powershell
 python src\create_portfolio_visuals.py
 ```
 
@@ -916,7 +904,7 @@ The project includes automated or explicit checks for:
 - The stochastic demand scenarios are a discrete approximation to forecast uncertainty.
 - Shortage and holding costs are relative units rather than monetary values.
 - The evaluation uses one final 28-day holdout period.
-- The model does not include supplier lead times, order cycles or minimum order quantities.
+- The model does not include supplier lead times, ordering cycles, or minimum order quantities.
 - The current pipeline is designed as a portfolio decision-science demonstration rather than a production retail deployment.
 
 ---
@@ -936,7 +924,7 @@ Future improvements could include:
 - minimum order quantities;
 - product-volume-based warehouse capacity;
 - multi-period inventory optimisation;
-- Streamlit or Power BI decision dashboard;
+- a Streamlit or Power BI decision dashboard;
 - automated model retraining and monitoring.
 
 ---
@@ -950,7 +938,7 @@ This project demonstrates the ability to:
 - write analytical SQL;
 - build reproducible Python data pipelines;
 - implement leakage-safe time-series validation;
-- engineer lag, rolling, calendar and price features;
+- engineer lag, rolling, calendar, and price features;
 - compare statistical and machine-learning models honestly;
 - work with intermittent retail demand;
 - translate forecasts into inventory decisions;
