@@ -321,6 +321,58 @@ reports/tables/
 
 ---
 
+## Interactive Power BI Decision Dashboard
+
+The project includes a five-page Power BI report that converts the forecasting and optimisation pipeline into an interactive decision-support tool.
+
+The dashboard allows users to move from high-level business performance to individual product-store decisions.
+
+### Executive Overview
+
+![Power BI Executive Overview](powerbi/screenshots/01_executive_overview.png)
+
+The Executive Overview summarises the main business outcomes of the project:
+
+- **30.34% reduction in inventory operating cost** from Newsvendor-adjusted ordering compared with ML point-forecast ordering.
+- **98.75% fill rate** using the machine-learning forecast with Newsvendor safety stock.
+- **1.9234 RMSE** for the pooled histogram gradient-boosting model.
+- **0.0029 forecast bias**, indicating almost no systematic over- or underforecasting.
+- **13.89% operating-cost reduction** from stochastic optimisation under tight resource constraints.
+
+### Dashboard Pages
+
+| Page | Purpose |
+|---|---|
+| **Executive Overview** | Summarises forecasting, inventory, and optimisation performance. |
+| **Forecast Performance** | Compares forecasting models and supports store- and product-level error analysis. |
+| **Inventory Policy Analysis** | Examines point-forecast ordering versus Newsvendor-adjusted ordering. |
+| **Constrained Optimisation** | Compares proportional allocation, deterministic MILP, and stochastic expected-cost MILP under resource constraints. |
+| **Product & Store Drill-Down** | Traces an individual decision from forecast through target order, constrained allocation, and realised inventory outcome. |
+
+### Forecast Performance
+
+![Forecast Performance](powerbi/screenshots/02_forecast_performance.png)
+
+### Inventory Policy Analysis
+
+![Inventory Policy Analysis](powerbi/screenshots/03_inventory_policy_analysis.png)
+
+### Constrained Optimisation
+
+![Constrained Optimisation](powerbi/screenshots/04_constrained_optimisation.png)
+
+### Product & Store Drill-Down
+
+![Product and Store Drill-Down](powerbi/screenshots/05_product_store_drilldown.png)
+
+The interactive Power BI Desktop report is available at:
+
+[`powerbi/Retail_Demand_Inventory_Optimisation.pbix`](powerbi/Retail_Demand_Inventory_Optimisation.pbix)
+
+The semantic model uses a star-schema design with shared dimensions for products, stores, dates, forecasting models, inventory policies, resource scenarios, and allocation methods.
+
+---
+
 ## Forecasting Methodology
 
 ### Holdout Strategy
