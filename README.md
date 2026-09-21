@@ -183,7 +183,7 @@ Under near-full resources, proportional allocation remained marginally better by
 
 ## Dataset
 
-The project uses a reproducible subset of the public M5 Forecasting dataset.
+The project uses a reproducible subset of the public M5 Forecasting - Accuracy dataset.
 
 The analytical subset contains:
 
@@ -199,8 +199,13 @@ The final 28 days are reserved as an untouched evaluation period:
 ```text
 2016-04-25 to 2016-05-22
 ```
+The raw files required are:
 
-The raw data files are not committed to the repository because of their size.
+- `calendar.csv`
+- `sales_train_evaluation.csv`
+- `sell_prices.csv`
+
+Download the dataset from Kaggle and place the files in `data/raw/`.
 
 ---
 
@@ -776,6 +781,7 @@ Capacity utilisation is:
 - Git
 - GitHub
 - Visual Studio Code
+- Business Interligence
 
 ---
 
@@ -783,41 +789,50 @@ Capacity utilisation is:
 
 ```text
 retail-demand-inventory-optimizer/
-|
-|-- data/
-|   |-- raw/                  # Raw M5 files, ignored by Git
-|   |-- interim/              # Analytical subset, ignored by Git
-|   `-- processed/            # Database, feature table, and model
-|
-|-- reports/
-|   |-- figures/              # Portfolio visualisations
-|   `-- tables/               # Analytical and model results
-|
-|-- sql/
-|   |-- schema.sql
-|   `-- business_queries.sql
-|
-|-- src/
-|   |-- data_validation.py
-|   |-- build_initial_dataset.py
-|   |-- load_to_sqlite.py
-|   |-- export_business_reports.py
-|   |-- forecast_baseline.py
-|   |-- analyze_baseline_errors.py
-|   |-- adaptive_baseline.py
-|   |-- build_ml_features.py
-|   |-- train_ml_model.py
-|   |-- evaluate_inventory_policies.py
-|   |-- optimize_constrained_inventory.py
-|   |-- optimize_stochastic_inventory.py
-|   `-- create_portfolio_visuals.py
-|
-|-- tests/
-|   `-- test_interim_dataset.py
-|
-|-- requirements.txt
-|-- .gitignore
-`-- README.md
+│
+├── data/
+│   ├── raw/
+│   ├── interim/
+│   ├── processed/
+│   └── powerbi/
+│
+├── powerbi/
+│   ├── Retail_Demand_Inventory_Optimisation.pbix
+│   └── screenshots/
+│       ├── 01_executive_overview.png
+│       ├── 02_forecast_performance.png
+│       ├── 03_inventory_policy_analysis.png
+│       ├── 04_constrained_optimisation.png
+│       └── 05_product_store_drilldown.png
+│
+├── reports/
+│   ├── figures/
+│   └── tables/
+│
+├── sql/
+│   ├── schema.sql
+│   └── business_queries.sql
+│
+├── src/
+│   ├── data_validation.py
+│   ├── build_initial_dataset.py
+│   ├── load_to_sqlite.py
+│   ├── export_business_reports.py
+│   ├── forecast_baseline.py
+│   ├── analyze_baseline_errors.py
+│   ├── adaptive_baseline.py
+│   ├── build_ml_features.py
+│   ├── train_ml_model.py
+│   ├── evaluate_inventory_policies.py
+│   ├── optimize_constrained_inventory.py
+│   ├── optimize_stochastic_inventory.py
+│   ├── create_portfolio_visuals.py
+│   └── export_powerbi_data.py
+│
+├── tests/
+├── README.md
+├── requirements.txt
+└── .gitignore
 ```
 
 ---
@@ -928,21 +943,16 @@ The project includes automated or explicit checks for:
 
 ## Possible Extensions
 
-Future improvements could include:
+Future extensions could include:
 
-- expanding the pipeline to all M5 products and stores
-- rolling-origin evaluation across multiple holdout periods
-- probabilistic forecasting
-- quantile gradient boosting
-- hierarchical forecast reconciliation
-- Croston-style intermittent-demand models
-- product-specific shortage and holding costs
-- supplier lead times
-- minimum order quantities
-- product-volume-based warehouse capacity
-- multi-period inventory optimisation
-- a Streamlit or Power BI decision dashboard
-- automated model retraining and monitoring
+- deploying the analytical workflow as a Streamlit application;
+- publishing the Power BI report through Power BI Service;
+- automated refresh of the Power BI semantic model;
+- probabilistic forecasting with explicit prediction intervals;
+- larger-scale optimisation across additional stores and product categories;
+- rolling-origin forecast validation;
+- automated model monitoring and retraining;
+- sensitivity analysis for shortage, holding, budget, and capacity assumptions.
 
 ---
 
